@@ -8,7 +8,7 @@ proxy = {
     'https': 'https://your_proxy_address:your_proxy_port'
 }
 
-access_token = 'YOUR_ACCESS_TOKEN'
+access_token = '1075145793594113|5TKgEe3R_YuZkz8KWGeZ-oFOOP0'
 graph = GraphAPI(access_token)
 
 # Function to extract usernames and emails from comments
@@ -26,7 +26,7 @@ def extract_user_info(comment):
 def main():
     ##defining the main function
     # Get comments from a post (replace 'POST_ID' with the actual post ID)
-    post_id = 'POST_ID'
+    post_id = 'dddvsyebhee'
 
     # Using a proxy with requests
     session = requests.Session()
