@@ -1,7 +1,14 @@
 from facebook import GraphAPI
 import re
+import requests
 
-access_token = ''
+# Proxy configuration
+proxy = {
+    'http': 'http://your_proxy_address:your_proxy_port',
+    'https': 'https://your_proxy_address:your_proxy_port'
+}
+
+access_token = 'YOUR_ACCESS_TOKEN'
 graph = GraphAPI(access_token)
 
 # Function to extract usernames and emails from comments
@@ -15,15 +22,24 @@ def extract_user_info(comment):
     else:
         return None, None
 
-# Get comments from a post (replace 'POST_ID' with the actual post ID)
-post_id = 'POST_ID'
-comments = graph.get_connections(post_id, 'comments')
 
-# Save usernames and emails to a text file
-with open('user_info.txt', 'w') as file:
-    for comment in comments['data']:
-        username, email = extract_user_info(comment['message'])
-        if username and email:
-            file.write(f'Username: {username}, Email: {email}\n')
-            # Send a direct message to the user
-            graph.send_message(user_id=comment['from']['id'], message="Hello! We found your comment.")
+def main():
+    ##defining the main function
+    # Get comments from a post (replace 'POST_ID' with the actual post ID)
+    post_id = 'POST_ID'
+
+    # Using a proxy with requests
+    session = requests.Session()
+    session.proxies.update(proxy)
+    comments = session.get(f'https://graph.facebook.com/v12.0/{post_id}/comments', params={'access_token': access_token}).json()
+    # Save usernames and emails to a text file
+    with open('user_info.txt', 'w') as file:
+        for comment in comments['data']:
+            username, email = extract_user_info(comment['message'])
+            if username and email:
+                file.write(f'Username: {username}, Email: {email}\n')
+                # Send a direct message to the user
+                graph.send_message(user_id=comment['from']['id'], message="Hello! We found your comment.")
+
+if __name__ == __main__:
+    t
