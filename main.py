@@ -41,5 +41,4 @@ def main():
                 # Send a direct message to the user
                 graph.send_message(user_id=comment['from']['id'], message="Hello! We found your comment.")
 
-if __name__ == __main__:
-    t
+main()
