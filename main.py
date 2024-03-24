@@ -4,8 +4,8 @@ import requests
 
 # Proxy configuration
 proxy = {
-    'http': 'http://your_proxy_address:your_proxy_port',
-    'https': 'https://your_proxy_address:your_proxy_port'
+    'http': 'http://:proxy_port',
+    'https': 'https://proxy_address:proxy_port'
 }
 
 access_token = '1075145793594113|5TKgEe3R_YuZkz8KWGeZ-oFOOP0'
