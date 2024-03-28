@@ -5,7 +5,7 @@ import requests
 # Proxy configuration
 proxy = {
     'http': 'http://81.91.139.76:8080',
-    'https': 'https://79.110.201.235:8081'
+    'http': 'http://79.110.201.235:8081'
 }
 
 access_token = '1075145793594113|5TKgEe3R_YuZkz8KWGeZ-oFOOP0'
