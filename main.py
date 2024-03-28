@@ -4,7 +4,7 @@ import requests
 
 # Proxy configuration
 proxy = {
-    'https': 'http://81.91.139.76:8080',
+    'http': 'http://81.91.139.76:8080',
     'https': 'https://79.110.201.235:8081'
 }
 
