@@ -26,7 +26,7 @@ def extract_user_info(comment):
 def main():
     ##defining the main function
     # Get comments from a post (replace 'POST_ID' with the actual post ID)
-    post_id = 'dddvsyebhee'
+    post_id = '61557846621783'
 
     # Using a proxy with requests
     session = requests.Session()
