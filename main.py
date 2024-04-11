@@ -1,6 +1,7 @@
 from facebook import GraphAPI
-import re
-import requests
+import re, threading
+
+
 
 # Proxy configuration
 proxy = {
@@ -23,7 +24,7 @@ def extract_user_info(comment):
         return None, None
 
 
-def main():
+def informer():
     ##defining the main function
     # Get comments from a post (replace 'POST_ID' with the actual post ID)
     post_id = '61557846621783'
@@ -33,12 +34,24 @@ def main():
     session.proxies.update(proxy)
     comments = session.get(f'https://graph.facebook.com/v12.0/{post_id}/comments', params={'access_token': access_token}).json()
     # Save usernames and emails to a text file
+    messanger = "Hello Thanks For Your Feedback:"
     with open('user_info.txt', 'w') as file:
-        for comment in comments['data']:
+        for comment in comments['data']:            
             username, email = extract_user_info(comment['message'])
             if username and email:
                 file.write(f'Username: {username}, Email: {email}\n')
-                # Send a direct message to the user
-                graph.send_message(user_id=comment['from']['id'], message="Hello! We found your comment.")
+                file.close()
+                ##send the user a Message
+                graph.send_message(user_id=comment['from']['id'], message=messager)
+                                
+            else:
+                print("No Data Received!")
 
-main()
+##Threading the process               
+def threader():
+    user_thread = threading.thread(target=informer, name='thread1')
+    
+    user_thread.start
+    user_thread.join
+    
+threader()
